@@ -1,0 +1,33 @@
+Professeur 1
+1
+GEI101
+GEI102
+GEI103
+&
+Etudiant 1
+Etudiant 2
+Etudiant 3
+Etudiant 4
+Etudiant 5
+&
+Professeur 2
+1
+INF104
+INF105
+INF106
+&
+Etudiant 5
+Etudiant 6
+Etudiant 7
+Etudiant 8
+Etudiant 9
+&
+Professeur 3
+TEI201
+TEI202
+TEI203
+&
+Etudiant 10
+Etudiant 11
+Etudiant 12
+Etudiant 13
