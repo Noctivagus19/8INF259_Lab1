@@ -82,7 +82,7 @@ DossierProfesseur::DossierProfesseur(char* FP)
 				break;
 				labelFin2:
 				curseur = 0;
-				Professeur *nouveauProf = new Professeur;
+				Professeur *nouveauProf = (Professeur*)malloc(sizeof(Professeur));
 				courantProf->suivant = nouveauProf;
 				courantProf = courantProf->suivant;
 				courantCours = (Cours*)malloc(sizeof(Cours));
