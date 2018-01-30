@@ -32,33 +32,35 @@ DossierProfesseur::DossierProfesseur(char* FP)
 	if (dataSource)
 	{
 		string ligne;
-		int curseur = 0; 
+		int curseur = 0;
 
 		while (getline(dataSource, ligne))
 		{
 			switch (curseur)
 			{
 			case NOMPROF:
-				{	
+			{
 				courantProf->nom = new string;
 				*courantProf->nom = ligne;
 				curseur++;
-				}
-				break;
+			}
+			break;
 
 			case ANCIENETE:
-				{
+			{
 				courantProf->ancien = new int;
 				*courantProf->ancien = atoi(ligne.c_str());
 				curseur++;
-				}
-				break;
+			}
+			break;
 
 			case COURS:
-				{
+			{
 				if (ligne[0] == '&')
 				{
 					curseur++;
+					courantCours->sigle = NULL;
+					courantCours = NULL;
 					goto labelFin;
 				}
 				Cours *nouveauCours = (Cours*)malloc(sizeof(Cours));
@@ -66,15 +68,18 @@ DossierProfesseur::DossierProfesseur(char* FP)
 				*courantCours->sigle = ligne;
 				courantCours->suivant = nouveauCours;
 				courantCours = courantCours->suivant;
-				}
-				labelFin:
-				break;
+			}
+		labelFin:
+			break;
 
 			case ETUDIANTS:
 			{
 				if (ligne[0] == '&')
 				{
 					curseur++;
+					courantEtudiant->nom = NULL;
+					courantEtudiant = NULL;
+					//delete courantEtudiant;
 					goto labelFin2;
 				}
 				Etudiant *nouvelEtudiant = (Etudiant*)malloc(sizeof(Etudiant));
@@ -83,7 +88,7 @@ DossierProfesseur::DossierProfesseur(char* FP)
 				courantEtudiant->apres = nouvelEtudiant;
 				courantEtudiant = courantEtudiant->apres;
 				break;
-				labelFin2:
+			labelFin2:
 				curseur = 0;
 				Professeur *nouveauProf = (Professeur*)malloc(sizeof(Professeur));
 				courantProf->suivant = nouveauProf;
@@ -92,10 +97,14 @@ DossierProfesseur::DossierProfesseur(char* FP)
 				courantProf->listeCours = courantCours;
 				courantEtudiant = (Etudiant*)malloc(sizeof(Etudiant));
 				courantProf->listeEtudiants = courantEtudiant;
-				}
-				break;
+			}
+			break;
 			}
 		}
+		courantProf->nom = NULL;
+		courantProf = NULL;
+
+
 		dataSource.close();
 	}
 }
@@ -109,27 +118,42 @@ DossierProfesseur::~DossierProfesseur()
 void DossierProfesseur::Afficher()
 {
 	Professeur * courantProfesseur = tete;
-	Cours * courantCours = tete->listeCours;
-	Etudiant * courantEtudiant = tete->listeEtudiants;
+	Cours * courantCours = courantProfesseur->listeCours;
+	Etudiant * courantEtudiant = courantProfesseur->listeEtudiants;
 
-	/*try {
-		while (courantProfesseur != NULL)
+	try {
+		while (courantProfesseur->nom)
 		{
 			cout << *courantProfesseur->nom << endl;
+			cout << *courantProfesseur->ancien << endl;
+
+			while (courantCours->sigle)
+			{
+				cout << *courantCours->sigle << endl;
+				courantCours = courantCours->suivant;
+			}
+
+			while (courantEtudiant->nom)
+			{
+				cout << *courantEtudiant->nom << endl;
+				courantEtudiant = courantEtudiant->apres;
+			}
 			courantProfesseur = courantProfesseur->suivant;
+			courantCours = courantProfesseur->listeCours;
+			courantEtudiant = courantProfesseur->listeEtudiants;
 		}
 	}
-	catch (exception e){}*/
+	catch (exception e) {}
 
-	for (int i = 0; i < 3; i++)
+	/*for (int i = 0; i < 3; i++)
 	{
-		cout << *courantProfesseur->nom << endl << *courantProfesseur->ancien << endl << *courantProfesseur->listeCours->sigle << endl
-			<< *courantProfesseur->listeCours->suivant->sigle << endl << *courantProfesseur->listeCours->suivant->suivant->sigle
-			<< endl << *courantProfesseur->listeEtudiants->nom << endl << *courantProfesseur->listeEtudiants->apres->nom << endl <<
-			*courantProfesseur->listeEtudiants->apres->apres->nom << endl;
-		courantProfesseur = courantProfesseur->suivant;
-	}
-	
+	cout << *courantProfesseur->nom << endl << *courantProfesseur->ancien << endl << *courantProfesseur->listeCours->sigle << endl
+	<< *courantProfesseur->listeCours->suivant->sigle << endl << *courantProfesseur->listeCours->suivant->suivant->sigle
+	<< endl << *courantProfesseur->listeEtudiants->nom << endl << *courantProfesseur->listeEtudiants->apres->nom << endl <<
+	*courantProfesseur->listeEtudiants->apres->apres->nom << endl;
+	courantProfesseur = courantProfesseur->suivant;
+	}*/
+
 }
 
 void DossierProfesseur::executerCommandes()
