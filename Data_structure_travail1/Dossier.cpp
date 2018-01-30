@@ -1,8 +1,11 @@
 //#include "stdafx.h"
 #include "Dossier.h"
 #include <iostream>
+#include <string>
 #include <fstream>
 #include <string>
+#include <vector>
+#include <iterator>
 using namespace std;
 
 #define NOMPROF 0
@@ -129,5 +132,21 @@ void DossierProfesseur::Afficher()
 	
 }
 
+void DossierProfesseur::executerCommandes()
+{
+	ifstream ftFile("C:/FT.txt");
+	if (ftFile.is_open())
+	{
+		std::vector<string> linesVector;
 
+		copy(istream_iterator<string>(ftFile),
+			istream_iterator<string>(),
+			back_inserter(linesVector));
 
+		for (std::vector<string>::const_iterator i = linesVector.begin(); i != linesVector.end(); ++i)
+		{
+			std::cout << i->at(0) << "\n"; /* Isolation de l'opérateur */
+			//string lineParam = i->substr(1, i->size() - 1);
+		}
+	}
+}

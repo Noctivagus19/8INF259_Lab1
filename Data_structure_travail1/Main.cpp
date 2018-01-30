@@ -9,6 +9,8 @@ int main()
 	DossierProfesseur * docProf = new DossierProfesseur(FP);
 	docProf->Afficher();
 
+	docProf->executerCommandes();
+
 	system("PAUSE");
 	return 0;
 }

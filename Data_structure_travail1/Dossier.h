@@ -43,6 +43,8 @@ public:
 	void sauvegarderListe(string *FP); /* Recopie liste chaînée dans fichier FP */
 
 	void Afficher(); // Pour faire des tests
+
+	void executerCommandes();
 };
 
 
