@@ -4,8 +4,6 @@
 #include <string>
 #include <fstream>
 #include <string>
-#include <vector>
-#include <iterator>
 using namespace std;
 
 #define NOMPROF 0
@@ -158,19 +156,39 @@ void DossierProfesseur::Afficher()
 
 void DossierProfesseur::executerCommandes()
 {
-	ifstream ftFile("C:/FT.txt");
-	if (ftFile.is_open())
+	ifstream dataSource("C:/FT.txt");
+	if (dataSource.is_open())
 	{
-		std::vector<string> linesVector;
+		string line;
+		string cmdOperator;
+		string cmdParam;
+		string startDelim = "[";
+		string stopDelim = "]";
+		unsigned firstDelimPos;
+		unsigned endPosDelim;
+		unsigned lastDelimPos;
 
-		copy(istream_iterator<string>(ftFile),
-			istream_iterator<string>(),
-			back_inserter(linesVector));
-
-		for (std::vector<string>::const_iterator i = linesVector.begin(); i != linesVector.end(); ++i)
+		while (getline(dataSource, line))
 		{
-			std::cout << i->at(0) << "\n"; /* Isolation de l'opérateur */
-			//string lineParam = i->substr(1, i->size() - 1);
+			/* Operator extraction */
+			cmdOperator = line.substr(0, 1);
+			
+			/* Operator parameter extraction*/
+			firstDelimPos = line.find(startDelim);
+			endPosDelim = firstDelimPos + startDelim.length();
+			lastDelimPos = line.find(stopDelim);
+			cmdParam = line.substr(endPosDelim, lastDelimPos - endPosDelim);
+
+			std::cout << "Operator: " << cmdOperator << " Parameter: ";
+			if (!cmdParam.empty())
+			{
+				std::cout << cmdParam;
+			}
+			else
+			{
+				std::cout << "N/A";
+			}
+			std::cout << "\n";			
 		}
 	}
 }
