@@ -1,4 +1,3 @@
-//#include "stdafx.h"
 #include "Dossier.h"
 #include <iostream>
 #include <string>
@@ -172,23 +171,30 @@ void DossierProfesseur::executerCommandes()
 		{
 			/* Operator extraction */
 			cmdOperator = line.substr(0, 1);
-			
-			/* Operator parameter extraction*/
-			firstDelimPos = line.find(startDelim);
-			endPosDelim = firstDelimPos + startDelim.length();
-			lastDelimPos = line.find(stopDelim);
-			cmdParam = line.substr(endPosDelim, lastDelimPos - endPosDelim);
 
-			std::cout << "Operator: " << cmdOperator << " Parameter: ";
-			if (!cmdParam.empty())
+			/* Operator parameter extraction*/
+			cmdParam = line.substr(line.find(' ') + 1 );
+
+			if (cmdOperator == "-")
 			{
-				std::cout << cmdParam;
+				cout << "Delete prof " << cmdParam << "\n";
 			}
-			else
+			else if (cmdOperator == "#")
 			{
-				std::cout << "N/A";
+				cout << "Display prof with most students\n";
 			}
-			std::cout << "\n";			
+			else if (cmdOperator == "*")
+			{
+				cout << "Display most wanted course\n";
+			}
+			else if (cmdOperator == "%")
+			{
+				cout << "Display numbr of prof wanting to teach " << cmdParam << "\n";
+			}
+			else if (cmdOperator == "$")
+			{
+				cout << "Save list in memory to FP.txt\n";
+			}
 		}
 	}
 }
