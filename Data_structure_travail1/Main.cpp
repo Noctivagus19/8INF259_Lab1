@@ -7,9 +7,8 @@ int main()
 {
 	char FP[] = "C:/FP.txt";
 	DossierProfesseur * docProf = new DossierProfesseur(FP);
-	docProf->Afficher();
 
-	docProf->executerCommandes();
+	docProf->afficherListe();
 
 	system("PAUSE");
 	return 0;

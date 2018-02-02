@@ -10,20 +10,18 @@ using namespace std;
 #define COURS 2
 #define ETUDIANTS 3
 
-
 DossierProfesseur::DossierProfesseur(char* FP)
 {
-	Professeur *courantProf;
-	DossierProfesseur * docProf = (DossierProfesseur*)malloc(sizeof(DossierProfesseur));
-	tete = (Professeur*)malloc(sizeof(Professeur));
-	courantProf = tete;
+	/*  Variables Cours */
+	teteCours = NULL;
 
-	Cours* courantCours = (Cours*)malloc(sizeof(Cours));
-	tete->listeCours = courantCours;
+	/* Variables Etudiant */
+	teteEtudiant = NULL;
 
-	Etudiant* courantEtudiant = (Etudiant*)malloc(sizeof(Etudiant));
-	tete->listeEtudiants = courantEtudiant;
-
+	/*  Variables Professeur*/
+	teteProf = NULL;
+	string nomProf;
+	int ancienProf = 0;
 
 	ifstream dataSource(FP);
 	if (dataSource)
@@ -37,120 +35,157 @@ DossierProfesseur::DossierProfesseur(char* FP)
 			{
 			case NOMPROF:
 			{
-				courantProf->nom = new string;
-				*courantProf->nom = ligne;
+				nomProf = ligne;
 				curseur++;
+				break;
 			}
-			break;
 
 			case ANCIENETE:
 			{
-				courantProf->ancien = new int;
-				*courantProf->ancien = atoi(ligne.c_str());
+				ancienProf = atoi(ligne.c_str());
 				curseur++;
+				break;
 			}
-			break;
 
 			case COURS:
 			{
 				if (ligne[0] == '&')
 				{
 					curseur++;
-					courantCours->sigle = NULL;
-					courantCours = NULL;
 					goto labelFin;
 				}
-				Cours *nouveauCours = (Cours*)malloc(sizeof(Cours));
-				courantCours->sigle = new string;
-				*courantCours->sigle = ligne;
-				courantCours->suivant = nouveauCours;
-				courantCours = courantCours->suivant;
+				Cours *c = new Cours();
+				c->sigle = ligne;
+
+				c->suivant = teteCours;
+				teteCours = c;
+			labelFin:
+				break;
 			}
-		labelFin:
-			break;
 
 			case ETUDIANTS:
 			{
 				if (ligne[0] == '&')
 				{
 					curseur++;
-					courantEtudiant->nom = NULL;
-					courantEtudiant = NULL;
-					//delete courantEtudiant;
 					goto labelFin2;
 				}
-				Etudiant *nouvelEtudiant = (Etudiant*)malloc(sizeof(Etudiant));
-				courantEtudiant->nom = new string;
-				*courantEtudiant->nom = ligne;
-				courantEtudiant->apres = nouvelEtudiant;
-				courantEtudiant = courantEtudiant->apres;
+				Etudiant *e = new Etudiant();
+				e->nom = ligne;
+
+				e->suivant = teteEtudiant;
+				teteEtudiant = e;
 				break;
 			labelFin2:
 				curseur = 0;
-				Professeur *nouveauProf = (Professeur*)malloc(sizeof(Professeur));
-				courantProf->suivant = nouveauProf;
-				courantProf = courantProf->suivant;
-				courantCours = (Cours*)malloc(sizeof(Cours));
-				courantProf->listeCours = courantCours;
-				courantEtudiant = (Etudiant*)malloc(sizeof(Etudiant));
-				courantProf->listeEtudiants = courantEtudiant;
+				Professeur *p = new Professeur();
+				p->nom = nomProf;
+				p->ancien = ancienProf;
+				p->listeCours = teteCours;
+				p->listeEtudiants = teteEtudiant;
+
+				p->suivant = teteProf;
+				teteProf = p;
+				teteCours = NULL;
+				teteEtudiant = NULL;
+				break;
 			}
-			break;
 			}
 		}
-		courantProf->nom = NULL;
-		courantProf = NULL;
-
 
 		dataSource.close();
 	}
 }
 
-
 DossierProfesseur::~DossierProfesseur()
 {
+	Professeur *next = teteProf;
 
+	while (next)
+	{
+		Cours *c = next->listeCours;
+		while (c)
+		{
+			Cours *deleteMe = c;
+			c = c->suivant;
+			delete deleteMe;
+		}
+		Etudiant *e = next->listeEtudiants;
+		while (e)
+		{
+			Etudiant *deleteMe = e;
+			e = e->suivant;
+			delete deleteMe;
+		}
+		Professeur *deleteMe = next;
+		next = next->suivant;
+		delete deleteMe;
+	}
 }
 
-void DossierProfesseur::Afficher()
+void DossierProfesseur::popValue()
 {
-	Professeur * courantProfesseur = tete;
-	Cours * courantCours = courantProfesseur->listeCours;
-	Etudiant * courantEtudiant = courantProfesseur->listeEtudiants;
+	if (teteProf != NULL)
+	{
+		Professeur *p = teteProf;
+		std::cout << p->nom << "\n";
+		std::cout << "Anciennete: " << p->ancien << "\n";
 
-	try {
-		while (courantProfesseur->nom)
+		teteProf = teteProf->suivant;
+		delete p;
+	}
+	else
+	{
+		std::cout << "La liste est vide\n";
+	}
+}
+
+void DossierProfesseur::afficherListe()
+{
+	Professeur *p = teteProf;
+
+	if (p)
+	{
+		while (p)
 		{
-			cout << *courantProfesseur->nom << endl;
-			cout << *courantProfesseur->ancien << endl;
-
-			while (courantCours->sigle)
+			Cours *c = p->listeCours;
+			Etudiant *e = p->listeEtudiants;
+			std::cout << p->nom << "\n";
+			std::cout << "Anciennete: " << p->ancien << "\n" << "Cours enseignes: ";
+			if (c != NULL)
 			{
-				cout << *courantCours->sigle << endl;
-				courantCours = courantCours->suivant;
+				std::cout << "\n";
+				while (c)
+				{
+					std::cout << c->sigle << "\n";
+					c = c->suivant;
+				}
 			}
-
-			while (courantEtudiant->nom)
+			else
 			{
-				cout << *courantEtudiant->nom << endl;
-				courantEtudiant = courantEtudiant->apres;
+				std::cout << "Ce professeur n'a aucun cours!\n";
 			}
-			courantProfesseur = courantProfesseur->suivant;
-			courantCours = courantProfesseur->listeCours;
-			courantEtudiant = courantProfesseur->listeEtudiants;
+			std::cout << "Etudiants: ";
+			if (e != NULL) {
+				std::cout << "\n";
+				while (e != NULL)
+				{
+					std::cout << e->nom << "\n";
+					e = e->suivant;
+				}
+			}
+			else
+			{
+				std::cout << "Ce professeur n'a aucun etudiants!\n";
+			}
+			std::cout << "\n";
+			p = p->suivant;
 		}
 	}
-	catch (exception e) {}
-
-	/*for (int i = 0; i < 3; i++)
+	else
 	{
-	cout << *courantProfesseur->nom << endl << *courantProfesseur->ancien << endl << *courantProfesseur->listeCours->sigle << endl
-	<< *courantProfesseur->listeCours->suivant->sigle << endl << *courantProfesseur->listeCours->suivant->suivant->sigle
-	<< endl << *courantProfesseur->listeEtudiants->nom << endl << *courantProfesseur->listeEtudiants->apres->nom << endl <<
-	*courantProfesseur->listeEtudiants->apres->apres->nom << endl;
-	courantProfesseur = courantProfesseur->suivant;
-	}*/
-
+		std::cout << "Il n'y a aucun professeurs a afficher!\n";
+	}
 }
 
 void DossierProfesseur::executerCommandes()
