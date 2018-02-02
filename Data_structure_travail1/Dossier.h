@@ -1,27 +1,6 @@
 #include <string>
 using namespace std;
 
-struct Cours
-{
-	string *sigle;
-	Cours *suivant;
-};
-
-struct Etudiant
-{
-	string *nom;
-	Etudiant* apres;
-};
-
-struct Professeur
-{
-	string *nom;
-	int* ancien;
-	Cours* listeCours;
-	Etudiant* listeEtudiants;
-	Professeur* suivant;
-};
-
 class DossierProfesseur
 {
 	struct Cours
