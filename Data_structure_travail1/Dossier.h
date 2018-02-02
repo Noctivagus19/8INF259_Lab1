@@ -5,22 +5,22 @@ class DossierProfesseur
 {
 	struct Cours
 	{
-		string sigle;
+		string *sigle;
 
 		Cours *suivant;
 	};
 
 	struct Etudiant
 	{
-		string nom;
+		string *nom;
 
 		Etudiant *suivant;
 	};
 
 	struct Professeur
 	{
-		string nom;
-		int ancien;
+		string *nom;
+		int *ancien;
 
 		Cours *listeCours;
 		Etudiant *listeEtudiants;

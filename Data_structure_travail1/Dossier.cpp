@@ -55,7 +55,8 @@ DossierProfesseur::DossierProfesseur(char* FP)
 					goto labelFin;
 				}
 				Cours *c = new Cours();
-				c->sigle = ligne;
+				c->sigle = new string();
+				*c->sigle = ligne;
 
 				c->suivant = teteCours;
 				teteCours = c;
@@ -71,7 +72,8 @@ DossierProfesseur::DossierProfesseur(char* FP)
 					goto labelFin2;
 				}
 				Etudiant *e = new Etudiant();
-				e->nom = ligne;
+				e->nom = new string();
+				*e->nom = ligne;
 
 				e->suivant = teteEtudiant;
 				teteEtudiant = e;
@@ -79,8 +81,10 @@ DossierProfesseur::DossierProfesseur(char* FP)
 			labelFin2:
 				curseur = 0;
 				Professeur *p = new Professeur();
-				p->nom = nomProf;
-				p->ancien = ancienProf;
+				p->nom = new string();
+				*p->nom = nomProf;
+				p->ancien = new int();
+				*p->ancien = ancienProf;
 				p->listeCours = teteCours;
 				p->listeEtudiants = teteEtudiant;
 
@@ -150,14 +154,14 @@ void DossierProfesseur::afficherListe()
 		{
 			Cours *c = p->listeCours;
 			Etudiant *e = p->listeEtudiants;
-			std::cout << p->nom << "\n";
-			std::cout << "Anciennete: " << p->ancien << "\n" << "Cours enseignes: ";
+			std::cout << *p->nom << "\n";
+			std::cout << "Anciennete: " << *p->ancien << "\n" << "Cours enseignes: ";
 			if (c != NULL)
 			{
 				std::cout << "\n";
 				while (c)
 				{
-					std::cout << c->sigle << "\n";
+					std::cout << *c->sigle << "\n";
 					c = c->suivant;
 				}
 			}
@@ -170,7 +174,7 @@ void DossierProfesseur::afficherListe()
 				std::cout << "\n";
 				while (e != NULL)
 				{
-					std::cout << e->nom << "\n";
+					std::cout << *e->nom << "\n";
 					e = e->suivant;
 				}
 			}
