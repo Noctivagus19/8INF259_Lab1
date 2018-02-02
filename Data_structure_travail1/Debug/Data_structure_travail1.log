@@ -1,10 +1,8 @@
-﻿  Dossier.cpp
-c:\users\jim\my documents\visual studio 2015\projects\8inf259_lab1\data_structure_travail1\dossier.cpp(207): warning C4101: 'lastDelimPos': unreferenced local variable
-c:\users\jim\my documents\visual studio 2015\projects\8inf259_lab1\data_structure_travail1\dossier.cpp(205): warning C4101: 'firstDelimPos': unreferenced local variable
-c:\users\jim\my documents\visual studio 2015\projects\8inf259_lab1\data_structure_travail1\dossier.cpp(206): warning C4101: 'endPosDelim': unreferenced local variable
-  Generating Code...
-  Compiling...
-  Main.cpp
-  Generating Code...
-  Data_structure_travail1.vcxproj -> C:\Users\Jim\My Documents\Visual Studio 2015\Projects\8INF259_Lab1\Debug\Data_structure_travail1.exe
-  Data_structure_travail1.vcxproj -> C:\Users\Jim\My Documents\Visual Studio 2015\Projects\8INF259_Lab1\Debug\Data_structure_travail1.pdb (Partial PDB)
+﻿  Main.cpp
+  Dossier.cpp
+c:\users\the_n\documents\uqac\structures de données\lab1\8inf259_travail1-master\8inf259_travail1-master\data_structure_travail1\dossier.cpp(207): warning C4101: 'lastDelimPos' : variable locale non référencée
+c:\users\the_n\documents\uqac\structures de données\lab1\8inf259_travail1-master\8inf259_travail1-master\data_structure_travail1\dossier.cpp(205): warning C4101: 'firstDelimPos' : variable locale non référencée
+c:\users\the_n\documents\uqac\structures de données\lab1\8inf259_travail1-master\8inf259_travail1-master\data_structure_travail1\dossier.cpp(206): warning C4101: 'endPosDelim' : variable locale non référencée
+  Génération de code en cours...
+  Data_structure_travail1.vcxproj -> C:\Users\The_N\Documents\UQAC\Structures de données\Lab1\8INf259_travail1-master\8INf259_travail1-master\Debug\Data_structure_travail1.exe
+  Data_structure_travail1.vcxproj -> C:\Users\The_N\Documents\UQAC\Structures de données\Lab1\8INf259_travail1-master\8INf259_travail1-master\Debug\Data_structure_travail1.pdb (Partial PDB)

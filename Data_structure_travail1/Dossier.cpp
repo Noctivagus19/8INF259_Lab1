@@ -12,6 +12,8 @@ using namespace std;
 
 DossierProfesseur::DossierProfesseur(char* FP)
 {
+	//Commentaire
+
 	/*  Variables Cours */
 	teteCours = NULL;
 
