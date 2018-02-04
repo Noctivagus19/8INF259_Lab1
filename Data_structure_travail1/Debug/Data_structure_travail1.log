@@ -2,10 +2,11 @@
 c:\users\jim\my documents\visual studio 2015\projects\8inf259_lab1\data_structure_travail1\dossier.cpp(208): warning C4101: 'lastDelimPos': unreferenced local variable
 c:\users\jim\my documents\visual studio 2015\projects\8inf259_lab1\data_structure_travail1\dossier.cpp(206): warning C4101: 'firstDelimPos': unreferenced local variable
 c:\users\jim\my documents\visual studio 2015\projects\8inf259_lab1\data_structure_travail1\dossier.cpp(207): warning C4101: 'endPosDelim': unreferenced local variable
-c:\users\jim\my documents\visual studio 2015\projects\8inf259_lab1\data_structure_travail1\dossier.cpp(296): warning C4018: '<': signed/unsigned mismatch
-c:\users\jim\my documents\visual studio 2015\projects\8inf259_lab1\data_structure_travail1\dossier.cpp(320): warning C4018: '<': signed/unsigned mismatch
-c:\users\jim\my documents\visual studio 2015\projects\8inf259_lab1\data_structure_travail1\dossier.cpp(328): warning C4018: '<': signed/unsigned mismatch
-c:\users\jim\my documents\visual studio 2015\projects\8inf259_lab1\data_structure_travail1\dossier.cpp(340): warning C4018: '<': signed/unsigned mismatch
-c:\users\jim\my documents\visual studio 2015\projects\8inf259_lab1\data_structure_travail1\dossier.cpp(350): warning C4018: '<': signed/unsigned mismatch
+c:\users\jim\my documents\visual studio 2015\projects\8inf259_lab1\data_structure_travail1\dossier.cpp(302): warning C4018: '<': signed/unsigned mismatch
+c:\users\jim\my documents\visual studio 2015\projects\8inf259_lab1\data_structure_travail1\dossier.cpp(326): warning C4018: '<': signed/unsigned mismatch
+c:\users\jim\my documents\visual studio 2015\projects\8inf259_lab1\data_structure_travail1\dossier.cpp(334): warning C4018: '<': signed/unsigned mismatch
+c:\users\jim\my documents\visual studio 2015\projects\8inf259_lab1\data_structure_travail1\dossier.cpp(346): warning C4018: '<': signed/unsigned mismatch
+c:\users\jim\my documents\visual studio 2015\projects\8inf259_lab1\data_structure_travail1\dossier.cpp(356): warning C4018: '<': signed/unsigned mismatch
+cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
   Data_structure_travail1.vcxproj -> C:\Users\Jim\My Documents\Visual Studio 2015\Projects\8INF259_Lab1\Debug\Data_structure_travail1.exe
   Data_structure_travail1.vcxproj -> C:\Users\Jim\My Documents\Visual Studio 2015\Projects\8INF259_Lab1\Debug\Data_structure_travail1.pdb (Partial PDB)

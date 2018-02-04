@@ -233,7 +233,7 @@ void DossierProfesseur::executerCommandes()
 			}
 			else if (cmdOperator == "$")
 			{
-				std::#cout << "Save list in memory to FP.txt\n";
+				std::cout << "Save list in memory to FP.txt\n";
 			}
 		}
 	}
@@ -272,7 +272,7 @@ void DossierProfesseur::afficherLeProfPlusEtudiants()
 	}
 	else
 	{
-		std::cout << "Le dossier ne contient aucun professeur!";
+		std::cout << "Le dossier ne contient aucun professeur!\n";
 	}
 
 }
