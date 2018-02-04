@@ -10,6 +10,8 @@ int main()
 
 	docProf->afficherListe();
 
+	docProf->afficherleprofplusetudiants();
+	docProf->affichercoursplusdemande();
 	system("PAUSE");
 	return 0;
 }
