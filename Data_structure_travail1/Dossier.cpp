@@ -357,16 +357,22 @@ void DossierProfesseur::afficherCoursPlusDemande()
 		{
 			if (*vecteurProfs[lesPlusDemandes[a]]->nom == *profLePlusAncien->nom)
 			{
-				cout << *vecteurProfs[lesPlusDemandes[a]]->nom << endl << *vecteurCours[lesPlusDemandes[a]]->sigle << endl << vecteurNbCours[lesPlusDemandes[a]] << endl;
+				std::cout << "Le cours le plus demande est: " << *vecteurCours[lesPlusDemandes[a]]->sigle << "\nCe cours est enseigne " << vecteurNbCours[lesPlusDemandes[a]]
+					<< " fois ce semestre\n" << "Professeur responsable du cours: " << *vecteurProfs[lesPlusDemandes[a]]->nom << endl;
 				break;
 			}
 		}
 		
 
 	}
+	else if (lesPlusDemandes.size() < 1)
+	{
+		std::cout << "Le dossier ne contient aucun professeur!\n";
+	}
 	else
 	{
-		cout << *vecteurProfs[lesPlusDemandes[0]]->nom << endl << *vecteurCours[lesPlusDemandes[0]]->sigle << endl << vecteurNbCours[lesPlusDemandes[0]] << endl;
+		std::cout << "Le cours le plus demande est: " << *vecteurCours[lesPlusDemandes[0]]->sigle << "\nCe cours est enseigne " << vecteurNbCours[lesPlusDemandes[0]]
+			<< " fois ce semestre\n" << "Professeur responsable du cours: " << *vecteurProfs[lesPlusDemandes[0]]->nom << endl;
 	}
 
 }

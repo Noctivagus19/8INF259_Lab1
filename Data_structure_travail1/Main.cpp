@@ -8,16 +8,16 @@ int main()
 	char FP[] = "C:/FP.txt";
 	DossierProfesseur * docProf = new DossierProfesseur(FP);
 
-	docProf->afficherLeProfPlusEtudiants();
+	docProf->afficherCoursPlusDemande();
 	docProf->supprimerProf("Professeur 1");
 	std::cout << "//////////////////////////////////////////////\n";
-	docProf->afficherLeProfPlusEtudiants();
+	docProf->afficherCoursPlusDemande();
 	docProf->supprimerProf("Professeur 3");
 	std::cout << "//////////////////////////////////////////////\n";
-	docProf->afficherLeProfPlusEtudiants();
+	docProf->afficherCoursPlusDemande();
 	docProf->supprimerProf("Professeur 2");
 	std::cout << "//////////////////////////////////////////////\n";
-	docProf->afficherLeProfPlusEtudiants();
+	docProf->afficherCoursPlusDemande();
 
 	system("PAUSE");
 	return 0;

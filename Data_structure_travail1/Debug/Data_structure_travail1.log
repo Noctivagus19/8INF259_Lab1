@@ -7,6 +7,5 @@ c:\users\jim\my documents\visual studio 2015\projects\8inf259_lab1\data_structur
 c:\users\jim\my documents\visual studio 2015\projects\8inf259_lab1\data_structure_travail1\dossier.cpp(334): warning C4018: '<': signed/unsigned mismatch
 c:\users\jim\my documents\visual studio 2015\projects\8inf259_lab1\data_structure_travail1\dossier.cpp(346): warning C4018: '<': signed/unsigned mismatch
 c:\users\jim\my documents\visual studio 2015\projects\8inf259_lab1\data_structure_travail1\dossier.cpp(356): warning C4018: '<': signed/unsigned mismatch
-cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
   Data_structure_travail1.vcxproj -> C:\Users\Jim\My Documents\Visual Studio 2015\Projects\8INF259_Lab1\Debug\Data_structure_travail1.exe
   Data_structure_travail1.vcxproj -> C:\Users\Jim\My Documents\Visual Studio 2015\Projects\8INF259_Lab1\Debug\Data_structure_travail1.pdb (Partial PDB)
