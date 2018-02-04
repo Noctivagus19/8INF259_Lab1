@@ -11,7 +11,7 @@ int main()
 	docProf->afficherListe();
 	docProf->executerCommandes();
 	docProf->afficherListe();
-
+	docProf->afficherCoursPlusDemande();
 	system("PAUSE");
 	return 0;
 }

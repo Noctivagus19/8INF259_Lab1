@@ -11,6 +11,8 @@ using namespace std;
 #define COURS 2
 #define ETUDIANTS 3
 
+
+//Constructeur
 DossierProfesseur::DossierProfesseur(char* FP)
 {
 	/*  Variables Cours */
@@ -32,7 +34,7 @@ DossierProfesseur::DossierProfesseur(char* FP)
 
 		while (getline(dataSource, ligne))
 		{
-			switch (curseur)
+			switch (curseur) //Structure de séparation des données pour la création des structures
 			{
 			case NOMPROF:
 			{
@@ -240,6 +242,8 @@ void DossierProfesseur::executerCommandes()
 	}
 }
 
+
+//Cette fonction parcours toutes les structures de Professeurs, compte les étudiants et affiche le prof qui en a le plus
 void DossierProfesseur::afficherLeProfPlusEtudiants()
 {
 	Professeur * courantProf = teteProf;
@@ -247,18 +251,18 @@ void DossierProfesseur::afficherLeProfPlusEtudiants()
 	Professeur * profPlusEtudiants = teteProf;
 	int cptEtudiants = 0, lePlusEtudiants = 0;
 
-	while (courantProf != NULL)
+	while (courantProf != NULL)		//Parcourir les structures
 	{
 		courantEtudiant = courantProf->listeEtudiants;
 		cptEtudiants = 0;
 
-		while (courantEtudiant)
+		while (courantEtudiant)	//Compteur d'étudiants
 		{
 			cptEtudiants++;
 			courantEtudiant = courantEtudiant->suivant;
 		}
 
-		if (cptEtudiants > lePlusEtudiants)
+		if (cptEtudiants > lePlusEtudiants)	//Sauvegarde le nombre d'étudiants le plus élevé et le Professeur associé
 		{
 			lePlusEtudiants = cptEtudiants;
 			profPlusEtudiants = courantProf;
@@ -268,7 +272,7 @@ void DossierProfesseur::afficherLeProfPlusEtudiants()
 		
 	}
 
-	if (profPlusEtudiants != NULL)
+	if (profPlusEtudiants != NULL) // Affiche le professeur ayant le plus d'étudiants
 	{
 		std::cout << "Professeur ayant le plus d'etudiants : " << *profPlusEtudiants->nom << "\nNombre d'etudiants: " << lePlusEtudiants << endl;
 	}
@@ -278,6 +282,11 @@ void DossierProfesseur::afficherLeProfPlusEtudiants()
 	}
 
 }
+
+
+//Cette fonction va parcourir toutes les structures et va charger tous les cours demandés dans un vecteur.
+//2 autres vecteurs vont contenir le professeur associé et le nombre de demandes.
+//Finalement le cours le plus demandé (priorité à l'ancienneté du Professeur, premier rencontré) est affiché.
 
 void DossierProfesseur::afficherCoursPlusDemande()
 {
@@ -294,28 +303,33 @@ void DossierProfesseur::afficherCoursPlusDemande()
 
 	int a = 0 , b = 0, nombrePlusDemande=0;
 
-	while (courantProf != NULL)
+	while (courantProf != NULL) //Lecture de tous les Professeurs
 	{
 		courantCours = courantProf->listeCours;
 		bool trouve = false;
 
-		while (courantCours != NULL)
+		while (courantCours != NULL) //Lecture de tous les Cours
 		{
-			for (a = 0; a < vecteurCours.size(); a++)
+			for (a = 0; a < vecteurCours.size(); a++)	//Parcourir le vecteur de cours
 			{
 				bool trouve = false;
-				if (*vecteurCours[a]->sigle == *courantCours->sigle)
+				if (*vecteurCours[a]->sigle == *courantCours->sigle)	//Si le vecteur existe deja
 				{
-					vecteurNbCours[a] = vecteurNbCours[a] + 1;
+					vecteurNbCours[a] = vecteurNbCours[a] + 1;			//Incrementer le nombre de demande dans le vecteur nombre cours
 					bool trouve = true;
+
+					if (courantProf->ancien > vecteurProfs[a]->ancien)		//Assure que le professeur associé au cours est bien celui qui a le plus d'ancienneté
+					{
+						vecteurProfs[a] = courantProf;
+					}
 				}
 			}
 
-			if (trouve == false)
+			if (trouve == false)	//Si le cours n'existe pas dans le vecteur
 			{
-				vecteurCours.push_back(courantCours);
-				vecteurProfs.push_back(courantProf);
-				vecteurNbCours.push_back(1);
+				vecteurCours.push_back(courantCours);		//Ajouter le cours au vecteur
+				vecteurProfs.push_back(courantProf);		//Ajouter le prof au vecteur
+				vecteurNbCours.push_back(1);				//Ajouter le nombre de cours au vecteur
 			}
 			courantCours = courantCours->suivant;
 		}
@@ -325,7 +339,7 @@ void DossierProfesseur::afficherCoursPlusDemande()
 
 	}
 
-	for (a = 0; a < vecteurNbCours.size(); a++)
+	for (a = 0; a < vecteurNbCours.size(); a++)	//Parcourir le vecteur à la recherche du nombre de demandes le plus élevé
 	{
 		if (vecteurNbCours[a] > nombrePlusDemande)
 		{
@@ -333,21 +347,21 @@ void DossierProfesseur::afficherCoursPlusDemande()
 		}
 	}
 
-	for (a = 0; a < vecteurNbCours.size(); a++) 
+	for (a = 0; a < vecteurNbCours.size(); a++) //Parcourir le vecteur à la recherche du ou des cours les plus demandés
 	{
 		if (vecteurNbCours[a] == nombrePlusDemande)
 		{
-			lesPlusDemandes.push_back(a);
+			lesPlusDemandes.push_back(a);		//Charger le ou les plus demandés dans un vecteur
 		}
 	}
 
-	if (lesPlusDemandes.size() > 1)
+	if (lesPlusDemandes.size() > 1)	//Si il y a plus d'un cours dans les plus demandés
 	{
 		int lePlusAncien = 0;
 		Professeur * profLePlusAncien = NULL;
-		for (a = 0; a < lesPlusDemandes.size(); a++)
+		for (a = 0; a < lesPlusDemandes.size(); a++)	//Parcourir le vecteur des plus demandés
 		{
-			if (*vecteurProfs[lesPlusDemandes[a]]->ancien > lePlusAncien)
+			if (*vecteurProfs[lesPlusDemandes[a]]->ancien > lePlusAncien)	//Verifie l'ancienneté des professeurs et charge la première valeur d'ancienneté la plus élevée
 			{
 				lePlusAncien = *vecteurProfs[lesPlusDemandes[a]]->ancien;
 				profLePlusAncien = vecteurProfs[lesPlusDemandes[a]];
@@ -355,9 +369,9 @@ void DossierProfesseur::afficherCoursPlusDemande()
 			}
 		}
 
-		for (a = 0; a < lesPlusDemandes.size(); a++)
+		for (a = 0; a < lesPlusDemandes.size(); a++)	//Parcours le vecteur des cours les plus demandés à la recherche du Prof ayant le plus d'ancienneté
 		{
-			if (*vecteurProfs[lesPlusDemandes[a]]->nom == *profLePlusAncien->nom)
+			if (*vecteurProfs[lesPlusDemandes[a]]->nom == *profLePlusAncien->nom)	//Si le prof est trouvé, afficher le cours
 			{
 				std::cout << "Le cours le plus demande est: " << *vecteurCours[lesPlusDemandes[a]]->sigle << "\nCe cours est enseigne " << vecteurNbCours[lesPlusDemandes[a]]
 					<< " fois ce semestre\n" << "Professeur responsable du cours: " << *vecteurProfs[lesPlusDemandes[a]]->nom << endl;
@@ -367,7 +381,7 @@ void DossierProfesseur::afficherCoursPlusDemande()
 		
 
 	}
-	else if (lesPlusDemandes.size() < 1)
+	else if (lesPlusDemandes.size() < 1)	//Si seulement un cours se trouve dans le vecteur des plus demandés, alors afficher
 	{
 		std::cout << "Le dossier ne contient aucun professeur!\n";
 	}
