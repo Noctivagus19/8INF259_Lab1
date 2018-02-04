@@ -237,3 +237,21 @@ void DossierProfesseur::executerCommandes()
 		}
 	}
 }
+
+void DossierProfesseur::supprimerProf(string nomProf)
+{
+	Professeur *profCourant = teteProf;
+	Professeur *deleteMe;
+	while (profCourant)
+	{
+		if (nomProf == *profCourant->nom)
+		{
+			deleteMe = profCourant;
+			/* 2 situations:
+			- lastProf = NULL aka teteProf
+			- lastProf != NULL*/
+			//if (lastProf == NULL)
+		}
+			
+	}
+}

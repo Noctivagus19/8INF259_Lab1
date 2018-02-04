@@ -43,4 +43,5 @@ public:
 	void popValue();
 	void DossierProfesseur::afficherListe();
 	void DossierProfesseur::executerCommandes();
+	void DossierProfesseur::supprimerProf(string nomProf);
 };
