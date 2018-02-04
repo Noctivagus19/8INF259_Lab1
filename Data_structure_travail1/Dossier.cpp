@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <string>
+#include <vector>
 using namespace std;
 
 #define NOMPROF 0
@@ -236,6 +237,132 @@ void DossierProfesseur::executerCommandes()
 			}
 		}
 	}
+}
+
+void DossierProfesseur::afficherleprofplusetudiants()
+{
+	Professeur * courantProf = teteProf;
+	Etudiant * courantEtudiant;
+	Professeur * profPlusEtudiants = teteProf;
+	int cptEtudiants = 0, lePlusEtudiants = 0;
+
+	while (courantProf != NULL)
+	{
+		courantEtudiant = courantProf->listeEtudiants;
+		cptEtudiants = 0;
+
+		while (courantEtudiant)
+		{
+			cptEtudiants++;
+			courantEtudiant = courantEtudiant->suivant;
+		}
+
+		if (cptEtudiants > lePlusEtudiants)
+		{
+			lePlusEtudiants = cptEtudiants;
+			profPlusEtudiants = courantProf;
+		}
+
+		courantProf = courantProf->suivant;
+		
+	}
+
+	cout << "Professeur ayant le plus d'etudiants : " << *profPlusEtudiants->nom << " // Nombre d'etudiants: " << lePlusEtudiants << endl;
+
+}
+
+void DossierProfesseur::affichercoursplusdemande()
+{
+	Professeur * courantProf = teteProf;
+	Professeur * profCoursPlusDemande = courantProf;
+	Cours * courantCours = NULL;
+	Cours * coursPlusDemande = NULL;
+
+	vector<Cours*> vecteurCours(0);
+	vector<int> vecteurNbCours(0);
+	vector<Professeur*> vecteurProfs(0);
+
+	vector<int> lesPlusDemandes(0);
+
+	int a = 0 , b = 0, nombrePlusDemande=0;
+
+	while (courantProf != NULL)
+	{
+		courantCours = courantProf->listeCours;
+		bool trouve = false;
+
+		while (courantCours != NULL)
+		{
+			for (a = 0; a < vecteurCours.size(); a++)
+			{
+				bool trouve = false;
+				if (*vecteurCours[a]->sigle == *courantCours->sigle)
+				{
+					vecteurNbCours[a] = vecteurNbCours[a] + 1;
+					bool trouve = true;
+				}
+			}
+
+			if (trouve == false)
+			{
+				vecteurCours.push_back(courantCours);
+				vecteurProfs.push_back(courantProf);
+				vecteurNbCours.push_back(1);
+			}
+			courantCours = courantCours->suivant;
+		}
+
+		courantProf = courantProf->suivant;
+		
+
+	}
+
+	for (a = 0; a < vecteurNbCours.size(); a++)
+	{
+		if (vecteurNbCours[a] > nombrePlusDemande)
+		{
+			nombrePlusDemande = vecteurNbCours[a];
+		}
+	}
+
+	for (a = 0; a < vecteurNbCours.size(); a++) 
+	{
+		if (vecteurNbCours[a] == nombrePlusDemande)
+		{
+			lesPlusDemandes.push_back(a);
+		}
+	}
+
+	if (lesPlusDemandes.size() > 1)
+	{
+		int lePlusAncien = 0;
+		Professeur * profLePlusAncien = NULL;
+		for (a = 0; a < lesPlusDemandes.size(); a++)
+		{
+			if (*vecteurProfs[lesPlusDemandes[a]]->ancien > lePlusAncien)
+			{
+				lePlusAncien = *vecteurProfs[lesPlusDemandes[a]]->ancien;
+				profLePlusAncien = vecteurProfs[lesPlusDemandes[a]];
+				
+			}
+		}
+
+		for (a = 0; a < lesPlusDemandes.size(); a++)
+		{
+			if (*vecteurProfs[lesPlusDemandes[a]]->nom == *profLePlusAncien->nom)
+			{
+				cout << *vecteurProfs[lesPlusDemandes[a]]->nom << endl << *vecteurCours[lesPlusDemandes[a]]->sigle << endl << vecteurNbCours[lesPlusDemandes[a]] << endl;
+				break;
+			}
+		}
+		
+
+	}
+	else
+	{
+		cout << *vecteurProfs[lesPlusDemandes[0]]->nom << endl << *vecteurCours[lesPlusDemandes[0]]->sigle << endl << vecteurNbCours[lesPlusDemandes[0]] << endl;
+	}
+
 }
 
 void DossierProfesseur::supprimerProf(string nomProf)
