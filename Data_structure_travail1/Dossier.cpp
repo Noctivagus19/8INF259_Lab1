@@ -156,7 +156,7 @@ void DossierProfesseur::afficherListe()
 			Cours *c = p->listeCours;
 			Etudiant *e = p->listeEtudiants;
 			std::cout << *p->nom << "\n";
-			std::cout << "Anciennete: " << *p->ancien << "\n" << "Cours enseignes: ";
+			std::cout << "Anciennete: " << *p->ancien << "\nCours enseignes: ";
 			if (c != NULL)
 			{
 				std::cout << "\n";
@@ -181,7 +181,7 @@ void DossierProfesseur::afficherListe()
 			}
 			else
 			{
-				std::cout << "Ce professeur n'a aucun etudiants!\n";
+				std::cout << "Ce professeur n'a aucun etudiant!\n";
 			}
 			std::cout << "\n";
 			p = p->suivant;
@@ -189,7 +189,7 @@ void DossierProfesseur::afficherListe()
 	}
 	else
 	{
-		std::cout << "Il n'y a aucun professeurs a afficher!\n";
+		std::cout << "Il n'y a aucun professeur a afficher!\n";
 	}
 }
 
@@ -217,15 +217,15 @@ void DossierProfesseur::executerCommandes()
 
 			if (cmdOperator == "-")
 			{
-				std::cout << "Delete prof " << cmdParam << "\n";
+				supprimerProf(cmdParam);
 			}
 			else if (cmdOperator == "#")
 			{
-				std::cout << "Display prof with most students\n";
+				afficherLeProfPlusEtudiants();
 			}
 			else if (cmdOperator == "*")
 			{
-				std::cout << "Display most wanted course\n";
+				afficherCoursPlusDemande();
 			}
 			else if (cmdOperator == "%")
 			{
@@ -235,6 +235,7 @@ void DossierProfesseur::executerCommandes()
 			{
 				std::cout << "Save list in memory to FP.txt\n";
 			}
+			std::cout << "\n";
 		}
 	}
 }
@@ -266,9 +267,10 @@ void DossierProfesseur::afficherLeProfPlusEtudiants()
 		courantProf = courantProf->suivant;
 		
 	}
+
 	if (profPlusEtudiants != NULL)
 	{
-		std::cout << "Professeur ayant le plus d'etudiants : " << *profPlusEtudiants->nom << " // Nombre d'etudiants: " << lePlusEtudiants << endl;
+		std::cout << "Professeur ayant le plus d'etudiants : " << *profPlusEtudiants->nom << "\nNombre d'etudiants: " << lePlusEtudiants << endl;
 	}
 	else
 	{
@@ -382,6 +384,8 @@ void DossierProfesseur::supprimerProf(string nomProf)
 	Professeur *profCourant = teteProf;
 	Professeur *lastProf = NULL;
 	Professeur *deleteMe;
+	int deleteCount = 0;
+
 	while (profCourant)
 	{
 		if (nomProf == *profCourant->nom)
@@ -397,7 +401,9 @@ void DossierProfesseur::supprimerProf(string nomProf)
 				lastProf->suivant = profCourant->suivant;
 			}
 			profCourant = profCourant->suivant;
+			std::cout << "Le professeur " << *deleteMe->nom << " a ete supprime!\n";
 			delete deleteMe;
+			++deleteCount;
 		} 
 		else
 		{
