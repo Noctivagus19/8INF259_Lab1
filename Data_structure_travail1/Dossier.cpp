@@ -217,29 +217,29 @@ void DossierProfesseur::executerCommandes()
 
 			if (cmdOperator == "-")
 			{
-				cout << "Delete prof " << cmdParam << "\n";
+				std::cout << "Delete prof " << cmdParam << "\n";
 			}
 			else if (cmdOperator == "#")
 			{
-				cout << "Display prof with most students\n";
+				std::cout << "Display prof with most students\n";
 			}
 			else if (cmdOperator == "*")
 			{
-				cout << "Display most wanted course\n";
+				std::cout << "Display most wanted course\n";
 			}
 			else if (cmdOperator == "%")
 			{
-				cout << "Display numbr of prof wanting to teach " << cmdParam << "\n";
+				std::cout << "Display numbr of prof wanting to teach " << cmdParam << "\n";
 			}
 			else if (cmdOperator == "$")
 			{
-				cout << "Save list in memory to FP.txt\n";
+				std::#cout << "Save list in memory to FP.txt\n";
 			}
 		}
 	}
 }
 
-void DossierProfesseur::afficherleprofplusetudiants()
+void DossierProfesseur::afficherLeProfPlusEtudiants()
 {
 	Professeur * courantProf = teteProf;
 	Etudiant * courantEtudiant;
@@ -266,12 +266,18 @@ void DossierProfesseur::afficherleprofplusetudiants()
 		courantProf = courantProf->suivant;
 		
 	}
-
-	cout << "Professeur ayant le plus d'etudiants : " << *profPlusEtudiants->nom << " // Nombre d'etudiants: " << lePlusEtudiants << endl;
+	if (profPlusEtudiants != NULL)
+	{
+		std::cout << "Professeur ayant le plus d'etudiants : " << *profPlusEtudiants->nom << " // Nombre d'etudiants: " << lePlusEtudiants << endl;
+	}
+	else
+	{
+		std::cout << "Le dossier ne contient aucun professeur!";
+	}
 
 }
 
-void DossierProfesseur::affichercoursplusdemande()
+void DossierProfesseur::afficherCoursPlusDemande()
 {
 	Professeur * courantProf = teteProf;
 	Professeur * profCoursPlusDemande = courantProf;
