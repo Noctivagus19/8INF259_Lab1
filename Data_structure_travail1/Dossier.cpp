@@ -368,17 +368,29 @@ void DossierProfesseur::affichercoursplusdemande()
 void DossierProfesseur::supprimerProf(string nomProf)
 {
 	Professeur *profCourant = teteProf;
+	Professeur *lastProf = NULL;
 	Professeur *deleteMe;
 	while (profCourant)
 	{
 		if (nomProf == *profCourant->nom)
 		{
 			deleteMe = profCourant;
-			/* 2 situations:
-			- lastProf = NULL aka teteProf
-			- lastProf != NULL*/
-			//if (lastProf == NULL)
+			if (lastProf == NULL) // Suppression de l'élément de tête
+			{
+				lastProf = profCourant->suivant;
+				teteProf = lastProf;
+			}
+			else // Suppression d'un élément à une position n > 2
+			{
+				lastProf->suivant = profCourant->suivant;
+			}
+			profCourant = profCourant->suivant;
+			delete deleteMe;
+		} 
+		else
+		{
+			lastProf = profCourant;
+			profCourant = profCourant->suivant;
 		}
-			
 	}
 }
