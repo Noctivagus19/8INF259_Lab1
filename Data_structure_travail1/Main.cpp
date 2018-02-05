@@ -10,8 +10,15 @@ int main()
 
 	docProf->afficherListe();
 	docProf->executerCommandes();
-	docProf->afficherListe();
-	docProf->afficherCoursPlusDemande();
+	
+	std::cout << "Professeur ayant le plus d'etudiants : " << *docProf->afficherLeProfPlusEtudiants() << endl;
+
+	std::cout << "Le cours le plus demande est: " << *docProf->afficherCoursPlusDemande() << endl;
+
+	string coursDonne = "GEI103";
+	docProf->afficherNbreProfPourUnCours(&coursDonne);
+	cout << "Le nombre de professeurs pour le cours " << coursDonne << " est : " << docProf->afficherNbreProfPourUnCours(&coursDonne) << endl;
+
 	system("PAUSE");
 	return 0;
 }

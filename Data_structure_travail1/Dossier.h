@@ -44,7 +44,8 @@ public:
 	void DossierProfesseur::afficherListe();
 	void DossierProfesseur::executerCommandes();
 	void DossierProfesseur::supprimerProf(string nomProf);
-	void DossierProfesseur::afficherLeProfPlusEtudiants();
-	void DossierProfesseur::afficherCoursPlusDemande();
+	string* DossierProfesseur::afficherLeProfPlusEtudiants();
+	string* DossierProfesseur::afficherCoursPlusDemande();
+	int DossierProfesseur::afficherNbreProfPourUnCours(string* coursDonne);
 	
 };

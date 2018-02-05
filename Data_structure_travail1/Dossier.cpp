@@ -244,7 +244,7 @@ void DossierProfesseur::executerCommandes()
 
 
 //Cette fonction parcours toutes les structures de Professeurs, compte les étudiants et affiche le prof qui en a le plus
-void DossierProfesseur::afficherLeProfPlusEtudiants()
+string* DossierProfesseur::afficherLeProfPlusEtudiants()
 {
 	Professeur * courantProf = teteProf;
 	Etudiant * courantEtudiant;
@@ -274,7 +274,7 @@ void DossierProfesseur::afficherLeProfPlusEtudiants()
 
 	if (profPlusEtudiants != NULL) // Affiche le professeur ayant le plus d'étudiants
 	{
-		std::cout << "Professeur ayant le plus d'etudiants : " << *profPlusEtudiants->nom << "\nNombre d'etudiants: " << lePlusEtudiants << endl;
+		return profPlusEtudiants->nom;
 	}
 	else
 	{
@@ -288,7 +288,7 @@ void DossierProfesseur::afficherLeProfPlusEtudiants()
 //2 autres vecteurs vont contenir le professeur associé et le nombre de demandes.
 //Finalement le cours le plus demandé (priorité à l'ancienneté du Professeur, premier rencontré) est affiché.
 
-void DossierProfesseur::afficherCoursPlusDemande()
+string* DossierProfesseur::afficherCoursPlusDemande()
 {
 	Professeur * courantProf = teteProf;
 	Professeur * profCoursPlusDemande = courantProf;
@@ -373,9 +373,7 @@ void DossierProfesseur::afficherCoursPlusDemande()
 		{
 			if (*vecteurProfs[lesPlusDemandes[a]]->nom == *profLePlusAncien->nom)	//Si le prof est trouvé, afficher le cours
 			{
-				std::cout << "Le cours le plus demande est: " << *vecteurCours[lesPlusDemandes[a]]->sigle << "\nCe cours est enseigne " << vecteurNbCours[lesPlusDemandes[a]]
-					<< " fois ce semestre\n" << "Professeur responsable du cours: " << *vecteurProfs[lesPlusDemandes[a]]->nom << endl;
-				break;
+				return vecteurCours[lesPlusDemandes[a]]->sigle;
 			}
 		}
 		
@@ -387,8 +385,7 @@ void DossierProfesseur::afficherCoursPlusDemande()
 	}
 	else
 	{
-		std::cout << "Le cours le plus demande est: " << *vecteurCours[lesPlusDemandes[0]]->sigle << "\nCe cours est enseigne " << vecteurNbCours[lesPlusDemandes[0]]
-			<< " fois ce semestre\n" << "Professeur responsable du cours: " << *vecteurProfs[lesPlusDemandes[0]]->nom << endl;
+		return vecteurCours[lesPlusDemandes[0]]->sigle;
 	}
 
 }
@@ -425,4 +422,34 @@ void DossierProfesseur::supprimerProf(string nomProf)
 			profCourant = profCourant->suivant;
 		}
 	}
+}
+
+
+//Cette fonction compte le nombre de professeurs qui donnent un cours spécifique
+int DossierProfesseur::afficherNbreProfPourUnCours(string* coursDonne)
+{
+	Professeur * courantProf = teteProf;
+	Cours * courantCours = NULL;
+	int nombreProfs = 0;
+
+	while (courantProf != NULL) //Lecture de tous les Professeurs
+	{
+		courantCours = courantProf->listeCours;
+
+		while (courantCours != NULL)
+		{
+			if (*courantCours->sigle == *coursDonne) //si le cours courant est celui qu'on cherche
+			{
+				nombreProfs++;	//Incrementer le compteur de profs
+				courantCours = NULL;
+				break;
+			}
+			else
+			{
+				courantCours = courantCours->suivant;
+			}
+		}
+		courantProf = courantProf->suivant;
+	}
+	return nombreProfs;
 }
