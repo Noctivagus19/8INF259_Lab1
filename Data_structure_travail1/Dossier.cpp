@@ -11,18 +11,20 @@ using namespace std;
 #define COURS 2
 #define ETUDIANTS 3
 
+//Variable qui substitue un retour de pointeur null pour les fonctions qui retournent un pointeur
+static string vide = "*** La liste est vide ***";
 
 //Constructeur
 DossierProfesseur::DossierProfesseur(char* FP)
 {
 	/*  Variables Cours */
-	teteCours = NULL;
+	teteCours = nullptr;
 
 	/* Variables Etudiant */
-	teteEtudiant = NULL;
+	teteEtudiant = nullptr;
 
 	/*  Variables Professeur*/
-	teteProf = NULL;
+	teteProf = nullptr;
 	string nomProf;
 	int ancienProf = 0;
 
@@ -93,8 +95,8 @@ DossierProfesseur::DossierProfesseur(char* FP)
 
 				p->suivant = teteProf;
 				teteProf = p;
-				teteCours = NULL;
-				teteEtudiant = NULL;
+				teteCours = nullptr;
+				teteEtudiant = nullptr;
 				break;
 			}
 			}
@@ -132,7 +134,7 @@ DossierProfesseur::~DossierProfesseur()
 
 void DossierProfesseur::popValue()
 {
-	if (teteProf != NULL)
+	if (teteProf != nullptr)
 	{
 		Professeur *p = teteProf;
 		std::cout << p->nom << "\n";
@@ -159,7 +161,7 @@ void DossierProfesseur::afficherListe()
 			Etudiant *e = p->listeEtudiants;
 			std::cout << *p->nom << "\n";
 			std::cout << "Anciennete: " << *p->ancien << "\nCours enseignes: ";
-			if (c != NULL)
+			if (c != nullptr)
 			{
 				std::cout << "\n";
 				while (c)
@@ -173,9 +175,9 @@ void DossierProfesseur::afficherListe()
 				std::cout << "Ce professeur n'a aucun cours!\n";
 			}
 			std::cout << "Etudiants: ";
-			if (e != NULL) {
+			if (e != nullptr) {
 				std::cout << "\n";
-				while (e != NULL)
+				while (e != nullptr)
 				{
 					std::cout << *e->nom << "\n";
 					e = e->suivant;
@@ -195,9 +197,9 @@ void DossierProfesseur::afficherListe()
 	}
 }
 
-void DossierProfesseur::executerCommandes()
+void DossierProfesseur::executerCommandes(char* FP)
 {
-	ifstream dataSource("C:/FT.txt");
+	ifstream dataSource("C:/docprof/FT.txt");
 	if (dataSource.is_open())
 	{
 		string line;
@@ -223,19 +225,20 @@ void DossierProfesseur::executerCommandes()
 			}
 			else if (cmdOperator == "#")
 			{
-				afficherLeProfPlusEtudiants();
+				std::cout << "Professeur ayant le plus d'etudiants : " << *afficherLeProfPlusEtudiants() << endl;
 			}
 			else if (cmdOperator == "*")
 			{
-				afficherCoursPlusDemande();
+				std::cout << "Le cours le plus demande est: " << *afficherCoursPlusDemande() << endl;
 			}
 			else if (cmdOperator == "%")
 			{
-				std::cout << "Display numbr of prof wanting to teach " << cmdParam << "\n";
+				cout << "Le nombre de professeurs pour le cours " << cmdParam << " est : " << afficherNbreProfPourUnCours(&cmdParam) << endl;
 			}
 			else if (cmdOperator == "$")
 			{
-				std::cout << "Save list in memory to FP.txt\n";
+				recopier(FP);
+				std::cout << "Liste enregistree dans le fichier FP.txt\n";
 			}
 			std::cout << "\n";
 		}
@@ -251,7 +254,7 @@ string* DossierProfesseur::afficherLeProfPlusEtudiants()
 	Professeur * profPlusEtudiants = teteProf;
 	int cptEtudiants = 0, lePlusEtudiants = 0;
 
-	while (courantProf != NULL)		//Parcourir les structures
+	while (courantProf != nullptr)		//Parcourir les structures
 	{
 		courantEtudiant = courantProf->listeEtudiants;
 		cptEtudiants = 0;
@@ -272,14 +275,16 @@ string* DossierProfesseur::afficherLeProfPlusEtudiants()
 		
 	}
 
-	if (profPlusEtudiants != NULL) // Affiche le professeur ayant le plus d'étudiants
+	if (profPlusEtudiants != nullptr) // Affiche le professeur ayant le plus d'étudiants
 	{
 		return profPlusEtudiants->nom;
 	}
 	else
 	{
 		std::cout << "Le dossier ne contient aucun professeur!\n";
+		return &vide;
 	}
+	
 
 }
 
@@ -292,8 +297,8 @@ string* DossierProfesseur::afficherCoursPlusDemande()
 {
 	Professeur * courantProf = teteProf;
 	Professeur * profCoursPlusDemande = courantProf;
-	Cours * courantCours = NULL;
-	Cours * coursPlusDemande = NULL;
+	Cours * courantCours = nullptr;
+	Cours * coursPlusDemande = nullptr;
 
 	vector<Cours*> vecteurCours(0);
 	vector<int> vecteurNbCours(0);
@@ -303,12 +308,12 @@ string* DossierProfesseur::afficherCoursPlusDemande()
 
 	int a = 0 , b = 0, nombrePlusDemande=0;
 
-	while (courantProf != NULL) //Lecture de tous les Professeurs
+	while (courantProf != nullptr) //Lecture de tous les Professeurs
 	{
 		courantCours = courantProf->listeCours;
 		bool trouve = false;
 
-		while (courantCours != NULL) //Lecture de tous les Cours
+		while (courantCours != nullptr) //Lecture de tous les Cours
 		{
 			for (a = 0; a < vecteurCours.size(); a++)	//Parcourir le vecteur de cours
 			{
@@ -358,7 +363,7 @@ string* DossierProfesseur::afficherCoursPlusDemande()
 	if (lesPlusDemandes.size() > 1)	//Si il y a plus d'un cours dans les plus demandés
 	{
 		int lePlusAncien = 0;
-		Professeur * profLePlusAncien = NULL;
+		Professeur * profLePlusAncien = nullptr;
 		for (a = 0; a < lesPlusDemandes.size(); a++)	//Parcourir le vecteur des plus demandés
 		{
 			if (*vecteurProfs[lesPlusDemandes[a]]->ancien > lePlusAncien)	//Verifie l'ancienneté des professeurs et charge la première valeur d'ancienneté la plus élevée
@@ -382,6 +387,7 @@ string* DossierProfesseur::afficherCoursPlusDemande()
 	else if (lesPlusDemandes.size() < 1)	//Si seulement un cours se trouve dans le vecteur des plus demandés, alors afficher
 	{
 		std::cout << "Le dossier ne contient aucun professeur!\n";
+		return &vide;
 	}
 	else
 	{
@@ -393,7 +399,7 @@ string* DossierProfesseur::afficherCoursPlusDemande()
 void DossierProfesseur::supprimerProf(string nomProf)
 {
 	Professeur *profCourant = teteProf;
-	Professeur *lastProf = NULL;
+	Professeur *lastProf = nullptr;
 	Professeur *deleteMe;
 	int deleteCount = 0;
 
@@ -402,7 +408,7 @@ void DossierProfesseur::supprimerProf(string nomProf)
 		if (nomProf == *profCourant->nom)
 		{
 			deleteMe = profCourant;
-			if (lastProf == NULL) // Suppression de l'élément de tête
+			if (lastProf == nullptr) // Suppression de l'élément de tête
 			{
 				lastProf = profCourant->suivant;
 				teteProf = lastProf;
@@ -429,19 +435,19 @@ void DossierProfesseur::supprimerProf(string nomProf)
 int DossierProfesseur::afficherNbreProfPourUnCours(string* coursDonne)
 {
 	Professeur * courantProf = teteProf;
-	Cours * courantCours = NULL;
+	Cours * courantCours = nullptr;
 	int nombreProfs = 0;
 
-	while (courantProf != NULL) //Lecture de tous les Professeurs
+	while (courantProf != nullptr) //Lecture de tous les Professeurs
 	{
 		courantCours = courantProf->listeCours;
 
-		while (courantCours != NULL)
+		while (courantCours != nullptr)
 		{
 			if (*courantCours->sigle == *coursDonne) //si le cours courant est celui qu'on cherche
 			{
 				nombreProfs++;	//Incrementer le compteur de profs
-				courantCours = NULL;
+				courantCours = nullptr;
 				break;
 			}
 			else
@@ -452,4 +458,49 @@ int DossierProfesseur::afficherNbreProfPourUnCours(string* coursDonne)
 		courantProf = courantProf->suivant;
 	}
 	return nombreProfs;
+}
+
+
+//Fonction d'écriture de la liste chainée vers le fichier
+void DossierProfesseur::recopier(char* FP)
+{
+
+	Professeur * courantProf = teteProf;
+	Cours * courantCours = nullptr;
+	Etudiant * courantEtudiant = nullptr;
+
+	ofstream fichierOut(FP);
+	//fichierOut.open("C:/docprof/FP.txt");
+
+	if (fichierOut)
+	{
+		while (courantProf != nullptr)
+		{
+			courantCours = courantProf->listeCours;
+			courantEtudiant = courantProf->listeEtudiants;
+			fichierOut << *courantProf->nom << endl << *courantProf->ancien << endl;
+
+			while (courantCours != nullptr)
+			{
+				fichierOut << *courantCours->sigle << endl;
+				courantCours = courantCours->suivant;
+			}
+
+			fichierOut << "&" << endl;
+
+			while (courantEtudiant != nullptr)
+			{
+				fichierOut << *courantEtudiant->nom << endl;
+				courantEtudiant = courantEtudiant->suivant;
+			}
+
+			fichierOut << "&" << endl;
+			courantProf = courantProf->suivant;
+		}
+	}
+	else
+	{
+		cout << "Erreur d'ouverture du fichier FP en ecriture" << endl;
+	}
+	fichierOut.close();
 }

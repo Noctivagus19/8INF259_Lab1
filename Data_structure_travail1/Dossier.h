@@ -42,10 +42,11 @@ public:
 	void addProf(string nomParam, int ancienParam);
 	void popValue();
 	void DossierProfesseur::afficherListe();
-	void DossierProfesseur::executerCommandes();
+	void DossierProfesseur::executerCommandes(char* FP);
 	void DossierProfesseur::supprimerProf(string nomProf);
 	string* DossierProfesseur::afficherLeProfPlusEtudiants();
 	string* DossierProfesseur::afficherCoursPlusDemande();
 	int DossierProfesseur::afficherNbreProfPourUnCours(string* coursDonne);
+	void DossierProfesseur::recopier(char*FP);
 	
 };

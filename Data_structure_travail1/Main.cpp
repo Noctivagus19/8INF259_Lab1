@@ -5,19 +5,20 @@ using namespace std;
 
 int main()
 {
-	char FP[] = "C:/FP.txt";
+	char FP[] = "C:/docprof/FP.txt";
 	DossierProfesseur * docProf = new DossierProfesseur(FP);
 
+	docProf->executerCommandes(FP);
 	docProf->afficherListe();
-	docProf->executerCommandes();
 	
-	std::cout << "Professeur ayant le plus d'etudiants : " << *docProf->afficherLeProfPlusEtudiants() << endl;
+	//std::cout << "Professeur ayant le plus d'etudiants : " << *docProf->afficherLeProfPlusEtudiants() << endl;
 
-	std::cout << "Le cours le plus demande est: " << *docProf->afficherCoursPlusDemande() << endl;
+	//std::cout << "Le cours le plus demande est: " << *docProf->afficherCoursPlusDemande() << endl;
 
-	string coursDonne = "GEI103";
-	docProf->afficherNbreProfPourUnCours(&coursDonne);
-	cout << "Le nombre de professeurs pour le cours " << coursDonne << " est : " << docProf->afficherNbreProfPourUnCours(&coursDonne) << endl;
+	//string coursDonne = "GEI103";
+	//cout << "Le nombre de professeurs pour le cours " << coursDonne << " est : " << docProf->afficherNbreProfPourUnCours(&coursDonne) << endl;
+
+	//docProf->recopier(FP);
 
 	system("PAUSE");
 	return 0;
