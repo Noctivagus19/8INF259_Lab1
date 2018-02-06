@@ -132,23 +132,6 @@ DossierProfesseur::~DossierProfesseur()
 	}
 }
 
-void DossierProfesseur::popValue()
-{
-	if (teteProf != nullptr)
-	{
-		Professeur *p = teteProf;
-		std::cout << p->nom << "\n";
-		std::cout << "Anciennete: " << p->ancien << "\n";
-
-		teteProf = teteProf->suivant;
-		delete p;
-	}
-	else
-	{
-		std::cout << "La liste est vide\n";
-	}
-}
-
 void DossierProfesseur::afficherListe()
 {
 	Professeur *p = teteProf;
