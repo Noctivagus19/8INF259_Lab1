@@ -1,4 +1,5 @@
-8INF259 - Structures de données: Laboratoire 1: Dossier Professeur
+8INF259 - Structures de données - Laboratoire 1: 
+### Dossier Professeur
 ======
 **Dossier Professeur** load a chained list of Profs/students/courses in memory from data in a .txt file. 
 Another .txt files contains commands to manipulate the list in memory.
