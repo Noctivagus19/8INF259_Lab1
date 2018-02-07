@@ -11,9 +11,10 @@ using namespace std;
 int main()
 {
 	char FP[] = "FP.txt";
+	char FT[] = "FT.txt";
 	DossierProfesseur * docProf = new DossierProfesseur(FP);
 
-	docProf->executerCommandes(FP);
+	docProf->executerCommandes(FP, FT);
 
 	system("PAUSE");
 	return 0;

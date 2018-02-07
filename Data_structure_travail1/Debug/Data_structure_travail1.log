@@ -1,12 +1,2 @@
-﻿  Dossier.cpp
-c:\users\the_n\documents\uqac\structures de données\lab1\8inf259_travail1-master\8inf259_travail1-master\data_structure_travail1\dossier.cpp(201): warning C4101: 'lastDelimPos' : variable locale non référencée
-c:\users\the_n\documents\uqac\structures de données\lab1\8inf259_travail1-master\8inf259_travail1-master\data_structure_travail1\dossier.cpp(199): warning C4101: 'firstDelimPos' : variable locale non référencée
-c:\users\the_n\documents\uqac\structures de données\lab1\8inf259_travail1-master\8inf259_travail1-master\data_structure_travail1\dossier.cpp(200): warning C4101: 'endPosDelim' : variable locale non référencée
-c:\users\the_n\documents\uqac\structures de données\lab1\8inf259_travail1-master\8inf259_travail1-master\data_structure_travail1\dossier.cpp(304): warning C4018: '<' : incompatibilité signed/unsigned
-c:\users\the_n\documents\uqac\structures de données\lab1\8inf259_travail1-master\8inf259_travail1-master\data_structure_travail1\dossier.cpp(333): warning C4018: '<' : incompatibilité signed/unsigned
-c:\users\the_n\documents\uqac\structures de données\lab1\8inf259_travail1-master\8inf259_travail1-master\data_structure_travail1\dossier.cpp(341): warning C4018: '<' : incompatibilité signed/unsigned
-c:\users\the_n\documents\uqac\structures de données\lab1\8inf259_travail1-master\8inf259_travail1-master\data_structure_travail1\dossier.cpp(353): warning C4018: '<' : incompatibilité signed/unsigned
-c:\users\the_n\documents\uqac\structures de données\lab1\8inf259_travail1-master\8inf259_travail1-master\data_structure_travail1\dossier.cpp(363): warning C4018: '<' : incompatibilité signed/unsigned
-c:\users\the_n\documents\uqac\structures de données\lab1\8inf259_travail1-master\8inf259_travail1-master\data_structure_travail1\dossier.cpp(383): warning C4715: 'DossierProfesseur::afficherCoursPlusDemande' : les chemins de contrôle ne retournent pas tous une valeur
-  Data_structure_travail1.vcxproj -> C:\Users\The_N\Documents\UQAC\Structures de données\Lab1\8INf259_travail1-master\8INf259_travail1-master\Debug\Data_structure_travail1.exe
-  Data_structure_travail1.vcxproj -> C:\Users\The_N\Documents\UQAC\Structures de données\Lab1\8INf259_travail1-master\8INf259_travail1-master\Debug\Data_structure_travail1.pdb (Partial PDB)
+﻿  Data_structure_travail1.vcxproj -> C:\Users\Jim\My Documents\Visual Studio 2015\Projects\8INF259_Lab1\Debug\Data_structure_travail1.exe
+  Data_structure_travail1.vcxproj -> C:\Users\Jim\My Documents\Visual Studio 2015\Projects\8INF259_Lab1\Debug\Data_structure_travail1.pdb (Partial PDB)

@@ -186,9 +186,9 @@ void DossierProfesseur::afficherListe()
 }
 
 // Exécuter les commandes présentes dans FT.txt
-void DossierProfesseur::executerCommandes(char* FP)
+void DossierProfesseur::executerCommandes(char* FP, char* FT)
 {
-	ifstream dataSource("FT.txt");
+	ifstream dataSource(FT);
 	if (dataSource.is_open())
 	{
 		string line;
