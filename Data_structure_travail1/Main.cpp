@@ -1,4 +1,9 @@
-//#include "stdafx.h"
+//
+// Développé par:
+// Jean-Michel Plourde PLOJ07029207
+// Jean-Pilippe Lapointe LAPJ16078607
+//
+
 #include "Dossier.h"
 #include <iostream>
 using namespace std;

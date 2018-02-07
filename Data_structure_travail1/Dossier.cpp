@@ -1,3 +1,8 @@
+//
+// Développé par:
+// Jean-Michel Plourde PLOJ07029207
+// Jean-Pilippe Lapointe LAPJ16078607
+//
 #include "Dossier.h"
 #include <iostream>
 #include <string>
@@ -180,6 +185,7 @@ void DossierProfesseur::afficherListe()
 	}
 }
 
+// Exécuter les commandes présentes dans ./docprof/FT.txt
 void DossierProfesseur::executerCommandes(char* FP)
 {
 	ifstream dataSource("C:/docprof/FT.txt");
@@ -216,18 +222,16 @@ void DossierProfesseur::executerCommandes(char* FP)
 			}
 			else if (cmdOperator == "%")
 			{
-				cout << "Le nombre de professeurs pour le cours " << cmdParam << " est : " << afficherNbreProfPourUnCours(&cmdParam) << endl;
+				std::cout << "Le nombre de professeurs pour le cours " << cmdParam << " est : " << afficherNbreProfPourUnCours(&cmdParam) << endl;
 			}
 			else if (cmdOperator == "$")
 			{
 				recopier(FP);
-				std::cout << "Liste enregistree dans le fichier FP.txt\n";
 			}
 			std::cout << "\n";
 		}
 	}
 }
-
 
 //Cette fonction parcours toutes les structures de Professeurs, compte les étudiants et affiche le prof qui en a le plus
 string* DossierProfesseur::afficherLeProfPlusEtudiants()
@@ -270,7 +274,6 @@ string* DossierProfesseur::afficherLeProfPlusEtudiants()
 	
 
 }
-
 
 //Cette fonction va parcourir toutes les structures et va charger tous les cours demandés dans un vecteur.
 //2 autres vecteurs vont contenir le professeur associé et le nombre de demandes.
@@ -413,7 +416,6 @@ void DossierProfesseur::supprimerProf(string nomProf)
 	}
 }
 
-
 //Cette fonction compte le nombre de professeurs qui donnent un cours spécifique
 int DossierProfesseur::afficherNbreProfPourUnCours(string* coursDonne)
 {
@@ -443,7 +445,6 @@ int DossierProfesseur::afficherNbreProfPourUnCours(string* coursDonne)
 	return nombreProfs;
 }
 
-
 //Fonction d'écriture de la liste chainée vers le fichier
 void DossierProfesseur::recopier(char* FP)
 {
@@ -453,7 +454,6 @@ void DossierProfesseur::recopier(char* FP)
 	Etudiant * courantEtudiant = nullptr;
 
 	ofstream fichierOut(FP);
-	//fichierOut.open("C:/docprof/FP.txt");
 
 	if (fichierOut)
 	{
@@ -480,10 +480,11 @@ void DossierProfesseur::recopier(char* FP)
 			fichierOut << "&" << endl;
 			courantProf = courantProf->suivant;
 		}
+		std::cout << "Liste enregistree dans le fichier FP.txt\n";
 	}
 	else
 	{
-		cout << "Erreur d'ouverture du fichier FP en ecriture" << endl;
+		std::cout << "Erreur d'ouverture du fichier FP en ecriture\n";
 	}
 	fichierOut.close();
 }
