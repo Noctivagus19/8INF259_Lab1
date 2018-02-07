@@ -10,7 +10,7 @@ using namespace std;
 
 int main()
 {
-	char FP[] = "C:/docprof/FP.txt";
+	char FP[] = "FP.txt";
 	DossierProfesseur * docProf = new DossierProfesseur(FP);
 
 	docProf->executerCommandes(FP);

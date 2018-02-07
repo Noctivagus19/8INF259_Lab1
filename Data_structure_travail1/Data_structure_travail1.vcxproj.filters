@@ -27,4 +27,12 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="FT.txt">
+      <Filter>Fichiers sources</Filter>
+    </Text>
+    <Text Include="FP.txt">
+      <Filter>Fichiers sources</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

@@ -25,6 +25,10 @@
     <ClCompile Include="Dossier.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="FT.txt" />
+    <Text Include="FP.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D99F017C-AED5-4D16-AD14-70B9B1232E24}</ProjectGuid>
     <RootNamespace>Data_structure_travail1</RootNamespace>

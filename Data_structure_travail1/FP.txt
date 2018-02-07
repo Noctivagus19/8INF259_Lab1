@@ -1,7 +1,8 @@
 Professeur 1
-1
+6
 GEI101
 GEI102
+GEI103
 GEI103
 &
 Etudiant 1
@@ -23,11 +24,15 @@ Etudiant 8
 Etudiant 9
 &
 Professeur 3
+4
+TEI201
 TEI201
 TEI202
-TEI203
+GEI103
+GEI103
 &
 Etudiant 10
 Etudiant 11
 Etudiant 12
 Etudiant 13
+&

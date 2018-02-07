@@ -185,10 +185,10 @@ void DossierProfesseur::afficherListe()
 	}
 }
 
-// Exécuter les commandes présentes dans ./docprof/FT.txt
+// Exécuter les commandes présentes dans FT.txt
 void DossierProfesseur::executerCommandes(char* FP)
 {
-	ifstream dataSource("C:/docprof/FT.txt");
+	ifstream dataSource("FT.txt");
 	if (dataSource.is_open())
 	{
 		string line;
